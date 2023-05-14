@@ -1,0 +1,32 @@
+service: todos
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: ap-south-1
+
+functions:
+  getTodos:
+    handler: src/functions/todos/index.getTodos
+    events:
+      - http:
+          path: todos
+          method: get
+  createTodo:
+    handler: src/functions/todos/index.createTodo
+    events:
+      - http:
+          path: todos
+          method: post
+  getTodoById:
+    handler: src/functions/todos/index.getTodoById
+    events:
+      - http:
+          path: todos/{todoId}
+          method: get
+  deleteTodo:
+    handler: src/functions/todos/index.deleteTodo
+    events:
+      - http:
+          path: todos/{todoId}
+          method: delete
